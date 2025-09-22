@@ -1,0 +1,84 @@
+.welcome-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.welcome-title {
+  color: #ffffff;
+  font-size: 28px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.welcome-title i {
+  color: #4caf50; /* Verde para el check */
+  font-size: 30px;
+  animation: bounce 0.5s ease-in-out;
+}
+
+.welcome-message {
+  color: #e5e7eb;
+  font-size: 16px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: slideIn 0.8s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
+
+.icon-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.animated-icon {
+  font-size: 24px;
+  color: #60a5fa; /* Azul vibrante */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.animated-icon:hover {
+  transform: scale(1.2) rotate(10deg);
+  color: #93c5fd;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  0% { opacity: 0; transform: translateX(-20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+  .welcome-container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .welcome-title {
+    font-size: 24px;
+  }
+
+  .animated-icon {
+    font-size: 20px;
+  }
+}
