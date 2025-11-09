@@ -5,6 +5,7 @@ import com.example.auth_google_demo_back.model.GoogleTokenResponse;
 import com.example.auth_google_demo_back.model.User;
 import com.example.auth_google_demo_back.service.GoogleService;
 import com.example.auth_google_demo_back.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,17 +19,13 @@ import java.util.Map;
 )
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final GoogleService googleService;
     private final UserService userService;
     private final JwtService jwtService;
 
-    public AuthController(GoogleService googleService, UserService userService, JwtService jwtService) {
-        this.googleService = googleService;
-        this.userService = userService;
-        this.jwtService = jwtService;
-    }
 
     @PostMapping("/google")
     public ResponseEntity<?> loginWithGoogle(@RequestBody Map<String,String> body) {
