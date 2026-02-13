@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@CrossOrigin(
-        origins = "http://localhost:4200",
-        allowedHeaders = "*",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS}
-)
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -32,16 +28,12 @@ public class AuthController {
         try {
             String code = body.get("code");
 
-            // 1️⃣ Intercambiar code por token en Google
+     
             GoogleTokenResponse tokenResponse = googleService.exchangeCodeForToken(code);
-
-            // 2️⃣ Obtener información del usuario
             Map<String,Object> userInfo = googleService.getUserInfo(tokenResponse.getAccess_token());
 
-            // 3️⃣ Registrar/actualizar en MySQL
             User user = userService.registerOrUpdate(userInfo);
 
-            // 4️⃣ Generar JWT propio
             String jwt = jwtService.generateToken(user);
 
             return ResponseEntity.ok(Map.of(

@@ -19,12 +19,12 @@ public class UserService {
         String picture = (String) userInfo.get("picture");
 
         return userRepo.findByEmail(email).map(u -> {
-            // Actualiza los campos si el usuario ya existe
+          
             u.setName(name);
             u.setPicture(picture);
             return userRepo.save(u);
         }).orElseGet(() -> {
-            // Crea un nuevo usuario
+    
             User newUser = User.builder()
                     .email(email)
                     .name(name)

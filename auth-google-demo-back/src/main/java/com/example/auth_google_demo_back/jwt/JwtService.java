@@ -18,7 +18,6 @@ public class JwtService {
     private final String secret;
     private final long expirationMs;
 
-    // Constructor para inyectar las propiedades desde application.properties
     public JwtService(
             @Value("${jwt.secret}") String secret,
             @Value("${jwt.expirationMs}") long expirationMs
@@ -41,7 +40,7 @@ public class JwtService {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> {}) // habilita CORS con configuración por defecto
+                .cors(cors -> {})
                 .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
         return http.build();
     }

@@ -19,7 +19,7 @@ public class User {
     private String email;
     private String name;
     private String picture;
-    private String provider; // google, github, etc.
+    private String provider;
 
 
 }

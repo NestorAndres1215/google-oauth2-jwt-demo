@@ -19,7 +19,7 @@ public class GoogleService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    // Constructor para inyectar las propiedades
+
     public GoogleService(
             @Value("${spring.security.oauth2.client.registration.google.client-id}") String clientId,
             @Value("${spring.security.oauth2.client.registration.google.client-secret}") String clientSecret,
@@ -30,12 +30,9 @@ public class GoogleService {
         this.redirectUri = redirectUri;
     }
 
-    // 1️⃣ Intercambiar code por token
     public GoogleTokenResponse exchangeCodeForToken(String code) {
         String tokenUrl = "https://oauth2.googleapis.com/token";
-        System.out.println("CODE = " + code);
-        System.out.println("CLIENT_ID = " + clientId);
-        System.out.println("REDIRECT_URI = " + redirectUri);
+
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("code", code);
         params.add("client_id", clientId);
@@ -61,7 +58,7 @@ public class GoogleService {
         return response.getBody();
     }
 
-    // 2️⃣ Obtener info del usuario usando access_token
+
     public Map<String, Object> getUserInfo(String accessToken) {
         String userInfoUrl = "https://openidconnect.googleapis.com/v1/userinfo";
 
@@ -77,9 +74,6 @@ public class GoogleService {
                 Map.class
         );
 
-        if (response.getStatusCode() != HttpStatus.OK || response.getBody() == null) {
-            throw new RuntimeException("Error obteniendo info de usuario en Google");
-        }
 
         return response.getBody();
     }
